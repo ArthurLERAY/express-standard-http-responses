@@ -1,0 +1,25 @@
+{
+  "name": "express-standard-http-responses",
+  "version": "1.0.1",
+  "description": "Helper package used to manage http responses for express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArthurLERAY/express-standard-http-responses.git"
+  },
+  "type": "module",
+  "keywords": [
+    "express",
+    "responses",
+    "http"
+  ],
+  "author": "Arthur LE RAY",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArthurLERAY/express-standard-http-responses/issues"
+  },
+  "homepage": "https://github.com/ArthurLERAY/express-standard-http-responses#README"
+}
