@@ -1,12 +1,17 @@
 ## Foreword
 Hi 👋 !  
-This package has the only purpose to format the responses using express.  
+This package has the only purpose to format the responses for express.  
 **Do not hesitate to contribute if you see any improvement to make**  
 
 # Installation
 ```  
 npm install express-standard-http-responses --save
 ```
+
+# Environment used
+
+`npm@8.5.1`  
+`node@14.16.0`
 
 # Example  
 ```js
@@ -64,7 +69,7 @@ app.get('/', (req, res) => {
 |-------------------|----------------------------------------------------------------------------------------------|
 | badRequest        | none                                                                                         |
 | unauthorized      | `You are not authorized to access this ressource.`                                           |
-| forbidden         | `Acces is forbidden.`                                                                        |
+| forbidden         | `Access is forbidden.`                                                                       |
 | notFound          | `This item was not found.`                                                                   |
 | methodNotAllowed  | `This method is not allowed for this ressource.`                                             |
 | proxyAuthRequired | `A proxy authentication is required.`                                                        |

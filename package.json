@@ -1,6 +1,6 @@
 {
   "name": "express-standard-http-responses",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Helper package used to manage http responses for express",
   "main": "index.js",
   "scripts": {
