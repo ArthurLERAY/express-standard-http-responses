@@ -1,6 +1,6 @@
 {
   "name": "express-standard-http-responses",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Helper package used to manage http responses for express",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,6 @@
     "type": "git",
     "url": "git+https://github.com/ArthurLERAY/express-standard-http-responses.git"
   },
-  "type": "module",
   "keywords": [
     "express",
     "responses",
