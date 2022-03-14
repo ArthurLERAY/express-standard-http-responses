@@ -1,8 +1,8 @@
 {
   "name": "express-standard-http-responses",
-  "version": "1.0.6",
+  "version": "1.1.1",
   "description": "Helper package used to manage http responses for express",
-  "main": "index.js",
+  "main": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,5 +20,15 @@
   "bugs": {
     "url": "https://github.com/ArthurLERAY/express-standard-http-responses/issues"
   },
-  "homepage": "https://github.com/ArthurLERAY/express-standard-http-responses#README"
+  "homepage": "https://github.com/ArthurLERAY/express-standard-http-responses#README",
+  "devDependencies": {
+    "tsc": "^2.0.4",
+    "typescript": "^4.6.2"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.13"
+  },
+  "files": [
+    "lib/**/*"
+  ]
 }
