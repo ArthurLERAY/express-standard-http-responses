@@ -14,9 +14,9 @@ npm install express-standard-http-responses --save
 `node@14.16.0`
 
 # Example  
-```js
-const express = require('express');
-const httpResponses = require('express-standard-http-responses');
+```ts
+import * as express from 'express';
+import {httpResponses} from 'express-standard-http-responses/lib';
 
 
 const app = express();
@@ -26,7 +26,7 @@ app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}`)
 });
 
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
     return httpResponses.success(res, {hello: 'world'}, 'This is an example');
 });
 ```
