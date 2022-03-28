@@ -1,6 +1,6 @@
 {
   "name": "express-standard-http-responses",
-  "version": "1.1.11",
+  "version": "1.1.13",
   "description": "Helper package used to manage http responses for express",
   "main": "src/index.ts",
   "scripts": {
@@ -10,10 +10,14 @@
     "type": "git",
     "url": "git+https://github.com/ArthurLERAY/express-standard-http-responses.git"
   },
+  "types": "lib/index.d.ts",
   "keywords": [
     "express",
     "responses",
-    "http"
+    "http",
+    "nodejs",
+    "typescript",
+    "service"
   ],
   "author": "Arthur LE RAY",
   "license": "ISC",
