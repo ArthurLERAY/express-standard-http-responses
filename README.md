@@ -14,7 +14,7 @@ npm install express-standard-http-responses --save
 
 # Example  
 ```ts
-import {httpResponses} from "express-standard-http-responses/lib";
+import {httpResponses} from "express-standard-http-responses";
 import * as express from 'express';
 
 const app = express();
