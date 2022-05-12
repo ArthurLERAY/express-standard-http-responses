@@ -1,138 +1,219 @@
-import * as express from 'express';
-export const httpResponses = {
+import {Response} from "express";
+import {IResponse} from "./interfaces/interfaces";
+
+export const httpResponses = (res: Response, {info, body}: IResponse = {}) => ({
+    body: (body: object) => {
+        return httpResponses(res, {body: body, info: info});
+    },
+    message: (information: string) => {
+        return httpResponses(res, {body: body, info: information});
+    },
 
     // 2xx codes
 
-    success: (res: express.Response, data: object, message: string = null) => {
-        return res.status(200).send({success: true, info: message, data: data});
+    success: () => {
+        return res.status(200).send({
+            success: true,
+            info: info,
+            data: body
+        });
     },
-    created: (res: express.Response, data: object, message: string = null) => {
-        return res.status(201).send({success: true, info: message ? message : '', data: data});
+    created: () => {
+        return res.status(201).send({
+            success: true,
+            info: info,
+            data: body
+        });
     },
-    accepted: (res: express.Response, data: object, message: string = null) => {
-        return res.status(202).send({success: true, info: message ? message : '', data: data});
+    accepted: () => {
+        return res.status(202).send({
+            success: true,
+            info: info,
+            data: body
+        });
     },
-    noContent: (res: express.Response) => {
-        return res.status(204).send({success: true});
+    noContent: () => {
+        return res.status(204).send({
+            success: true,
+            info: info,
+            data: body
+        });
     },
 
     // 3xx codes
 
-    multipleChoices: (res: express.Response, message: string) => {
-        return res.status(300).send({success: true, info: message});
+    multipleChoices: () => {
+        return res.status(300).send({
+            success: true,
+            info: info,
+            data: body
+        });
     },
-    movedPermanently: (res: express.Response, newURI: string) => {
-        return res.status(301).send({success: true, info: {newURI: newURI}});
+    movedPermanently: () => {
+        return res.status(301).send({
+            success: true,
+            info: info,
+            data: body
+        });
     },
-    found: (res: express.Response, newURL: string) => {
-        return res.status(302).send({success: true, info: {newURL: newURL}});
+    found: () => {
+        return res.status(302).send({
+            success: true,
+            info: info,
+            data: body
+        });
     },
-    seeOther: (res: express.Response, newURI: string) => {
-        return res.status(303).send({success: true, info: {newURL: newURI}});
+    seeOther: () => {
+        return res.status(303).send({
+            success: true,
+            info: info,
+            data: body
+        });
     },
 
     // 4xx codes
 
-    badRequest: (res: express.Response, message: string = null) => {
-        return res.status(400).send({success: false, info: message});
+    badRequest: () => {
+        return res.status(400).send({
+            success: false,
+            info: info,
+            data: body
+        });
     },
-    unauthorized: (res: express.Response, message: string = null) => {
+    unauthorized: () => {
         return res.status(401).send({
             success: false,
-            info: message ? message : 'You are not authorized to access this ressource.'
+            info: info ? info : 'You are not authorized to access this ressource.',
+            data: body
         });
     },
-    forbidden: (res: express.Response, message: string = null) => {
-        return res.status(403).send({success: false, info: message ? message : 'Access is forbidden.'});
+    forbidden: () => {
+        return res.status(403).send({
+            success: false,
+            info: info ? info : 'Access is forbidden.',
+            data: body
+        });
     },
-    notFound: (res: express.Response, message: string = null) => {
-        return res.status(404).send({success: false, info: message ? message : 'This item was not found.'});
+    notFound: () => {
+        return res.status(404).send({
+            success: false,
+            info: info ? info : 'This item was not found',
+            data: body
+        });
     },
-    methodNotAllowed: (res: express.Response, message: string = null) => {
+    methodNotAllowed: () => {
         return res.status(405).send({
             success: false,
-            info: message ? message : 'This method is not allowed for this ressource.'
+            info: info ? info : 'This method is not allowed for this ressource.',
+            data: body
         });
     },
-    proxyAuthRequired: (res: express.Response, message: string = null) => {
-        return res.status(407).send({success: false, info: message ? message : 'A proxy authentication is required.'});
+    proxyAuthRequired: () => {
+        return res.status(407).send({
+            success: false,
+            info: info ? info : 'A proxy authentication is required.',
+            data: body
+        });
     },
-    requestTimeout: (res: express.Response, message: string = null) => {
+    requestTimeout: () => {
         return res.status(408).send({
             success: false,
-            info: message ? message : 'The client did not produce a request within the time that the server was prepared to wait.'
+            info: info ? info : 'The client did not produce a request within the time that the server was prepared to wait.',
+            data: body
         });
     },
-    conflict: (res: express.Response, message: string = null) => {
+    conflict: () => {
         return res.status(409).send({
             success: false,
-            info: message ? message : 'There is a conflict on the requested ressource.'
+            info: info ? info : 'There is a conflict on the requested ressource.',
+            data: body
         });
     },
-    gone: (res: express.Response, message: string = null) => {
+    gone: () => {
         return res.status(410).send({
             success: false,
-            info: message ? message : 'This ressource is no longer available.'
+            info: info ? info : 'This ressource is no longer available.',
+            data: body
         });
     },
-    lengthRequired: (res: express.Response, message: string = null) => {
+    lengthRequired: () => {
         return res.status(411).send({
             success: false,
-            info: message ? message : 'Content length must be specified for this ressource.'
+            info: info ? info : 'Content length must be specified for this ressource.',
+            data: body
         });
     },
-    teapot: (res: express.Response, message: string = null) => {
-        return res.status(418).send({success: false, info: message ? message : 'I am a teapot.'});
+    teapot: () => {
+        return res.status(418).send({
+            success: false,
+            info: info ? info : 'I am a teapot',
+            data: body
+        });
     },
-    misdirected: (res: express.Response, message: string = null) => {
+    misdirected: () => {
         return res.status(421).send({
             success: false,
-            info: message ? message : 'This server is not able to produce a response for the given request.'
+            info: info ? info : 'This server is not able to produce a response for the given request.',
+            data: body
         });
     },
-    unprocessable: (res: express.Response, message: string = null) => {
+    unprocessable: () => {
         return res.status(422).send({
             success: false,
-            info: message ? message : 'The request was well-formed but was unable to be followed due to semantic errors.'
+            info: info ? info : 'The request was well-formed but was unable to be followed due to semantic errors.',
+            data: body
         });
     },
-    locked: (res: express.Response, message: string = null) => {
-        return res.status(423).send({success: false, info: message ? message : 'This ressource has been locked.'});
+    locked: () => {
+        return res.status(423).send({
+            success: false,
+            info: info ? info : 'This ressource has been locked.',
+            data: body
+        });
     },
-    tooManyRequests: (res: express.Response, message: string = null) => {
+    tooManyRequests: () => {
         return res.status(429).send({
             success: false,
-            info: message ? message : 'You have sent too many requests in a given amount of time.'
+            info: info ? info : 'You have sent too many requests in a given amount of time.',
+            data: body
         });
     },
 
     // 5xx codes
 
-    internalError: (res: express.Response, message: string = null) => {
+    internalError: () => {
         return res.status(500).send({
             success: false,
-            info: message ? message : 'An error occurred, try again later or report it to the developers team.'
+            info: info ? info : 'An error occurred, try again later or report it to the developers team.',
+            data: body
         });
     },
-    notImplemented: (res: express.Response, message: string = null) => {
-        return res.status(501).send({success: false, info: message ? message : 'This ressource is not implemented.'});
+    notImplemented: () => {
+        return res.status(501).send({
+            success: false,
+            info: info ? info : 'This ressource is not implemented.',
+            data: body
+        });
     },
-    serviceUnavailable: (res: express.Response, message: string = null) => {
+    serviceUnavailable: () => {
         return res.status(503).send({
             success: false,
-            info: message ? message : 'The service is not available at this time, try again later.'
+            info: info ? info : 'The service is not available at this time, try again later.',
+            data: body
         });
     },
-    insufficientStorage: (res: express.Response, message: string = null) => {
+    insufficientStorage: () => {
         return res.status(507).send({
             success: false,
-            info: message ? message : 'Unable to store the representation needed for to complete the request.'
+            info: info ? info : 'Unable to store the representation needed for to complete the request.',
+            data: body
         });
     },
-    loopDetected: (res: express.Response, message: string = null) => {
+    loopDetected: () => {
         return res.status(508).send({
             success: false,
-            info: message ? message : 'A loop was detected and the request has been aborted.'
+            info: info ? info : 'A loop was detected and the request has been aborted.',
+            data: body
         });
     },
-}
+});

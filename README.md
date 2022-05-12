@@ -1,7 +1,6 @@
 ## Foreword
 Hi 👋 !  
-This package has the only purpose to format the responses for express.  
-**Do not hesitate to contribute if you see any improvement to make**  
+This package has the only purpose to format the responses for express.
 
 # Installation
 ```  
@@ -15,20 +14,20 @@ npm install express-standard-http-responses --save
 
 # Example  
 ```ts
+import {httpResponses} from "express-standard-http-responses/lib";
 import * as express from 'express';
-import {httpResponses} from 'express-standard-http-responses/lib';
-
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.port || 3000;
 
 app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}`)
 });
 
-app.get('/', (req: Request, res: Response) => {
-    return httpResponses.success(res, {hello: 'world'}, 'This is an example');
+app.get('/test', (req, res) => {
+    return httpResponses(res).body({test: 'body'}).message('Information').success();
 });
+
 ```
 
 ## Response example
@@ -36,14 +35,25 @@ app.get('/', (req: Request, res: Response) => {
 ```json
 {
   "success": true,
-  "info": "This is an example",
+  "info": "Information",
   "data": {
-    "hello": "world"
+    "test": "body"
   }
 }
 ```
 
 # Methods
+
+## Setting a body
+```ts
+httpResponses(res).body({test: 'body'});
+```
+
+## Setting a message
+
+```ts
+httpResponses(res).message('This is an example.');
+```
 
 ## Codes 2xx
 
