@@ -1,4 +1,4 @@
-import {httpResponses} from "../lib";
+import {httpResponses} from "../index";
 import * as express from 'express';
 
 const app = express();

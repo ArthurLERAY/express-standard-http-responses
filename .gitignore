@@ -2,3 +2,6 @@
 /package-lock.json
 /.idea/
 /lib/
+index.d.ts
+index.js
+interfaces
