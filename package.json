@@ -1,9 +1,9 @@
 {
   "name": "express-standard-http-responses",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Helper package used to manage http responses for express",
-  "main": "./lib/index.js",
-  "types": "./lib/index.d.ts",
+  "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "yarn nodemon"
   },
@@ -14,7 +14,8 @@
     "http",
     "nodejs",
     "typescript",
-    "service"
+    "service",
+    "api"
   ],
   "author": "Arthur LE RAY",
   "license": "MIT",
@@ -36,7 +37,8 @@
   ],
   "nodemonConfig": {
     "watch": [
-      "tests"
+      "tests",
+      "src/index.ts"
     ],
     "ext": "ts",
     "exec": "tsc && ts-node tests/test.ts"

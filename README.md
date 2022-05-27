@@ -41,6 +41,31 @@ app.get('/test', (req, res) => {
   }
 }
 ```
+-----
+
+## Overwriting default response schema
+```ts
+import {httpResponses, setResponseSchema} from "express-standard-http-responses";
+import * as express from 'express';
+
+const app = express();
+const port = process.env.port || 3000;
+
+setResponseSchema({data: 'body', info: 'message'});
+```
+
+## New response schema
+```json
+{
+    "success": true,
+    "message": "Information",
+    "body": {
+        "test": "body"
+    }
+}
+```
+
+-----
 
 # Methods
 
