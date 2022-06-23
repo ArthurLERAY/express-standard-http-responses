@@ -1,232 +1,118 @@
 import {Response} from "express";
-import {IResponse, IResponseDefinitions} from "./interfaces/interfaces";
+import {IResponse} from "./interfaces/interfaces";
 
-let definitions = {
-    data: 'data',
-    info: 'info'
-};
-
-export function setResponseSchema({info, data}: IResponseDefinitions) {
-    if (data) definitions.data = data;
-    if (info) definitions.info = info;
-}
-
-export const httpResponses = (res: Response, {info, body}: IResponse = {}) => ({
+export const httpResponses = (res: Response, {message, body}: IResponse = {}) => ({
 
     // Methods
 
     body: (body: object) => {
-        return httpResponses(res, {body: body, info: info});
+        return httpResponses(res, {body: body, message: message});
     },
-    message: (information: string) => {
-        return httpResponses(res, {body: body, info: information});
+    message: (newMessage: string) => {
+        return httpResponses(res, {body: body, message: newMessage});
+    },
+
+    send: (statusCode: number) => {
+        if (message) body = {...body, ...{message: message}};
+        return res.status(statusCode).send(body);
     },
 
     // 2xx codes
 
     success: () => {
-        return res.status(200).send({
-            success: true,
-            [definitions.info]: info,
-            [definitions.data]: body
-        });
+        return httpResponses(res, {body: body, message: message}).send(200);
     },
     created: () => {
-        return res.status(201).send({
-            success: true,
-            [definitions.info]: info,
-            [definitions.data]: body
-        });
+        return httpResponses(res, {body: body, message: message}).send(201);
     },
     accepted: () => {
-        return res.status(202).send({
-            success: true,
-            [definitions.info]: info,
-            [definitions.data]: body
-        });
+        return httpResponses(res, {body: body, message: message}).send(202);
     },
     noContent: () => {
-        return res.status(204).send({
-            success: true,
-            [definitions.info]: info,
-            [definitions.data]: body
-        });
+        return httpResponses(res, {body: body, message: message}).send(204);
     },
 
     // 3xx codes
 
     multipleChoices: () => {
-        return res.status(300).send({
-            success: true,
-            [definitions.info]: info,
-            [definitions.data]: body
-        });
+        return httpResponses(res, {body: body, message: message}).send(300);
     },
     movedPermanently: () => {
-        return res.status(301).send({
-            success: true,
-            [definitions.info]: info,
-            [definitions.data]: body
-        });
+        return httpResponses(res, {body: body, message: message}).send(301);
     },
     found: () => {
-        return res.status(302).send({
-            success: true,
-            [definitions.info]: info,
-            [definitions.data]: body
-        });
+        return httpResponses(res, {body: body, message: message}).send(302);
     },
     seeOther: () => {
-        return res.status(303).send({
-            success: true,
-            [definitions.info]: info,
-            [definitions.data]: body
-        });
+        return httpResponses(res, {body: body, message: message}).send(303);
     },
 
     // 4xx codes
 
     badRequest: () => {
-        return res.status(400).send({
-            success: false,
-            [definitions.info]: info,
-            [definitions.data]: body
-        });
+        return httpResponses(res, {body: body, message: message}).send(400);
     },
     unauthorized: () => {
-        return res.status(401).send({
-            success: false,
-            [definitions.info]: info ? info : 'You are not authorized to access this ressource.',
-            [definitions.data]: body
-        });
+        return httpResponses(res, {body: body, message: message ? message : 'You are not authorized to access this ressource.'}).send(401);
     },
     forbidden: () => {
-        return res.status(403).send({
-            success: false,
-            [definitions.info]: info ? info : 'Access is forbidden.',
-            [definitions.data]: body
-        });
+        return httpResponses(res, {body: body, message: message ? message : 'Access is forbidden.'}).send(403);
     },
     notFound: () => {
-        return res.status(404).send({
-            success: false,
-            [definitions.info]: info ? info : 'This item was not found',
-            [definitions.data]: body
-        });
+        return httpResponses(res, {body: body, message: message ? message : 'This item was not found.'}).send(404);
     },
     methodNotAllowed: () => {
-        return res.status(405).send({
-            success: false,
-            [definitions.info]: info ? info : 'This method is not allowed for this ressource.',
-            [definitions.data]: body
-        });
+        return httpResponses(res, {body: body, message: message ? message : 'This method is not allowed for this ressource.'}).send(405);
     },
     proxyAuthRequired: () => {
-        return res.status(407).send({
-            success: false,
-            [definitions.info]: info ? info : 'A proxy authentication is required.',
-            [definitions.data]: body
-        });
+        return httpResponses(res, {body: body, message: message ? message : 'A proxy authentication is required.'}).send(407);
     },
     requestTimeout: () => {
-        return res.status(408).send({
-            success: false,
-            [definitions.info]: info ? info : 'The client did not produce a request within the time that the server was prepared to wait.',
-            [definitions.data]: body
-        });
+        return httpResponses(res, {body: body, message: message ? message : 'The client did not produce a request within the time that the server was prepared to wait.'}).send(408);
     },
     conflict: () => {
-        return res.status(409).send({
-            success: false,
-            [definitions.info]: info ? info : 'There is a conflict on the requested ressource.',
-            [definitions.data]: body
-        });
+        return httpResponses(res, {body: body, message: message ? message : 'There is a conflict on the requested ressource.'}).send(409);
     },
     gone: () => {
-        return res.status(410).send({
-            success: false,
-            [definitions.info]: info ? info : 'This ressource is no longer available.',
-            [definitions.data]: body
-        });
+        return httpResponses(res, {body: body, message: message ? message : 'This ressource is no longer available.'}).send(410);
     },
     lengthRequired: () => {
-        return res.status(411).send({
-            success: false,
-            [definitions.info]: info ? info : 'Content length must be specified for this ressource.',
-            [definitions.data]: body
-        });
+        return httpResponses(res, {body: body, message: message ? message : 'Content length must be specified for this ressource.'}).send(411);
     },
     teapot: () => {
-        return res.status(418).send({
-            success: false,
-            [definitions.info]: info ? info : 'I am a teapot',
-            [definitions.data]: body
-        });
+        return httpResponses(res, {body: body, message: message ? message : 'I am a teapot.'}).send(418);
     },
     misdirected: () => {
-        return res.status(421).send({
-            success: false,
-            [definitions.info]: info ? info : 'This server is not able to produce a response for the given request.',
-            [definitions.data]: body
-        });
+        return httpResponses(res, {body: body, message: message ? message : 'This server is not able to produce a response for the given request.'}).send(421);
+
     },
     unprocessable: () => {
-        return res.status(422).send({
-            success: false,
-            [definitions.info]: info ? info : 'The request was well-formed but was unable to be followed due to semantic errors.',
-            [definitions.data]: body
-        });
+        return httpResponses(res, {body: body, message: message ? message : 'The request was well-formed but was unable to be followed due to semantic errors.'}).send(422);
+
     },
     locked: () => {
-        return res.status(423).send({
-            success: false,
-            [definitions.info]: info ? info : 'This ressource has been locked.',
-            [definitions.data]: body
-        });
+        return httpResponses(res, {body: body, message: message ? message : 'This ressource has been locked.'}).send(423);
+
     },
     tooManyRequests: () => {
-        return res.status(429).send({
-            success: false,
-            [definitions.info]: info ? info : 'You have sent too many requests in a given amount of time.',
-            [definitions.data]: body
-        });
+        return httpResponses(res, {body: body, message: message ? message : 'You have sent too many requests in a given amount of time.'}).send(429);
     },
 
     // 5xx codes
 
     internalError: () => {
-        return res.status(500).send({
-            success: false,
-            [definitions.info]: info ? info : 'An error occurred, try again later or report it to the developers team.',
-            [definitions.data]: body
-        });
+        return httpResponses(res, {body: body, message: message ? message : 'An error occurred, try again later or report it to the developers team.'}).send(500);
     },
     notImplemented: () => {
-        return res.status(501).send({
-            success: false,
-            [definitions.info]: info ? info : 'This ressource is not implemented.',
-            [definitions.data]: body
-        });
+        return httpResponses(res, {body: body, message: message ? message : 'This ressource is not implemented.'}).send(501);
     },
     serviceUnavailable: () => {
-        return res.status(503).send({
-            success: false,
-            [definitions.info]: info ? info : 'The service is not available at this time, try again later.',
-            [definitions.data]: body
-        });
+        return httpResponses(res, {body: body, message: message ? message : 'The service is not available at this time, try again later.'}).send(503);
     },
     insufficientStorage: () => {
-        return res.status(507).send({
-            success: false,
-            [definitions.info]: info ? info : 'Unable to store the representation needed for to complete the request.',
-            [definitions.data]: body
-        });
+        return httpResponses(res, {body: body, message: message ? message : 'Unable to store the representation needed for to complete the request.'}).send(507);
     },
     loopDetected: () => {
-        return res.status(508).send({
-            success: false,
-            [definitions.info]: info ? info : 'A loop was detected and the request has been aborted.',
-            [definitions.data]: body
-        });
+        return httpResponses(res, {body: body, message: message ? message : 'A loop was detected and the request has been aborted.'}).send(508);
     },
 });

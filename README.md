@@ -25,43 +25,18 @@ app.listen(port, () => {
 });
 
 app.get('/test', (req, res) => {
-    return httpResponses(res).body({test: 'body'}).message('Information').success();
+    return httpResponses(res).body({body: {nested: "content"}}).message('Information').created();
 });
-
 ```
 
 ## Response example
 
 ```json
 {
-  "success": true,
-  "info": "Information",
-  "data": {
-    "test": "body"
-  }
-}
-```
------
-
-## Overwriting default response schema
-```ts
-import {httpResponses, setResponseSchema} from "express-standard-http-responses";
-import * as express from 'express';
-
-const app = express();
-const port = process.env.port || 3000;
-
-setResponseSchema({data: 'body', info: 'message'});
-```
-
-## New response schema
-```json
-{
-    "success": true,
-    "message": "Information",
-    "body": {
-        "test": "body"
-    }
+  "body": {
+    "nested": "content"
+  },
+  "message": "Information"
 }
 ```
 
