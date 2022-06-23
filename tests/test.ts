@@ -9,5 +9,6 @@ app.listen(port, () => {
 });
 
 app.get('/test', (req, res) => {
+    res.header('Authorization', 'test');
     return httpResponses(res).body({body: {nested: "content"}}).message('Information').created();
 });

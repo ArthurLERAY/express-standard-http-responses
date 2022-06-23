@@ -40,6 +40,15 @@ app.get('/test', (req, res) => {
 }
 ```
 
+## Headers
+You can set headers manually or through middlewares
+```typescript
+app.get('/test', (req, res) => {
+    res.header('Authorization', 'test');
+    return httpResponses(res).body({body: {nested: "content"}}).message('Information').created();
+});
+```
+
 -----
 
 # Methods
